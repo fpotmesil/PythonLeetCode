@@ -129,42 +129,32 @@ for val in second_list:
 print('The second input number stored in reverse order in the list-stack:')
 second_linked_stack.print()
 
-
-head = None
-head = ListNode(val=3, next=head)
-head = ListNode(val=0, next=head)
-head = ListNode(val=8, next=head)
-print( 'okay, now lets try the class print ')
-head.print()
-
-temp = get_list_of_values(head)
-temp.reverse()
-print(f'the list is {temp}')
-number1 = get_int_value_from_list(temp)
+temp1 = get_list_of_values(first_linked_stack)
+temp1.reverse()
+print(f'the list is {temp1}')
+number1 = get_int_value_from_list(temp1)
 print(f'the number is {number1}')
 
 
-val, head = head.pop()
-print( f'pop rval: {val}')
-head.print()
+temp2 = get_list_of_values(second_linked_stack)
+temp2.reverse()
+print(f'the list is {temp2}')
+number2 = get_int_value_from_list(temp2)
+print(f'the number is {number2}')
 
-val, head = head.pop()
-print( f'pop rval: {val}')
-head.print()
+answer = number1 + number2
+print(f'{number1} + {number2} = {answer}')
+#
+# quite the series of dance moves in this comprehension
+#
+answer_int_list = [int(char) for char in list(str(answer))]
+answer_linked_stack = None
+for val in answer_int_list:
+    answer_linked_stack = ListNode(val, answer_linked_stack)
 
-print( "pushing 9 ")
-head = ListNode(9, head)
-head.print()
-print( "pushing 53 ")
-head = ListNode(53, head)
-head.print()
+print('the answer stored as a NodeList linked stack thing: ')
+answer_linked_stack.print()
 
-llist1 = ListNode(val=3)
-llist2 = ListNode(val=0)
-llist3 = ListNode(val=8)
-llist1.next = llist2
-llist2.next = llist3
 
-print(f'well, node1: {llist1.val}, node2: {llist1.next.val}, node3: {llist1.next.next.val}')
 
 

@@ -34,33 +34,24 @@ my_string = input('Enter the string to find the longest substring with no repeat
 if len(s) == 0:
     return 0
 
-my_set = set()
 my_list= []
 sub_string = ""
 
 for c in s:
-    if c in my_set:
+    if c in sub_string:
         if len(sub_string) > 1:
-            my_list.append(sub_string)
+            my_list.append(len(sub_string))
             cut_idx = sub_string.index(c) + 1
             sub_string = sub_string[cut_idx:]
-            my_set.clear()
-            for char in sub_string:
-                my_set.add(char)
             sub_string += c
-            my_set.add(c)
         else:
-            my_set.clear()
-            my_list.append(sub_string)
+            my_list.append(len(sub_string))
             sub_string = c
-            my_set.add(c)
     else:
         sub_string += c
-        my_set.add(c)
 
-my_list.append(sub_string)
+my_list.append(len(sub_string))
 
-return len(max(my_list, key=len))
+return max(my_list)
 
-
-
+        

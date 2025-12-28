@@ -31,58 +31,36 @@ s consists of English letters, digits, symbols and spaces.
 
 my_string = input('Enter the string to find the longest substring with no repeating characters: ')
 
+if len(s) == 0:
+    return 0
+
 my_set = set()
-my_dict = {}
-start_idx = 0
+my_list= []
 sub_string = ""
 
-for x, c in enumerate(my_string):
-    print(f'char {c} as pos {x}')
-
-    #
-    # check to see if character is already in set
-    #
-    # if char is already in set, save in a dict:
-    #   - whatever substring we have
-    #   - start and end positions
-    # else: 
-    #   - keep growing the substring
-    #   - insert char in set
-    #
+for c in s:
     if c in my_set:
-        my_set.clear()
-        print(f'char {c} already in set.  saving {sub_string}, indices {start_idx}:{x}')
-        my_dict[sub_string] = [start_idx, x]
-        start_idx = x
-        sub_string = c 
-        my_set.add(c)
+        if len(sub_string) > 1:
+            my_list.append(sub_string)
+            cut_idx = sub_string.index(c) + 1
+            sub_string = sub_string[cut_idx:]
+            my_set.clear()
+            for char in sub_string:
+                my_set.add(char)
+            sub_string += c
+            my_set.add(c)
+        else:
+            my_set.clear()
+            my_list.append(sub_string)
+            sub_string = c
+            my_set.add(c)
     else:
         sub_string += c
         my_set.add(c)
 
-    print(f'current substring is {sub_string}')
-#
-# dont forget to add the current substring we are populating 
-# when we hit the end of the input
-#
-if len(sub_string) > 0: # always true i think.
-    my_dict[sub_string] = [start_idx, x]
+my_list.append(sub_string)
 
-#
-# can also skip the reverse sort and use a list[-1] for the longest substring.
-#
-sorted_strings = sorted(my_dict.keys(), key=len, reverse=True)
-print( f'The sorted strings by len are: {sorted_strings}')
-print( f'Largest substring is: \'{sorted_strings[0]}\', length: {len(sorted_strings[0])}')
-
-#
-# the original substring indices are still it the map for future reference.
-# 
-# this solution only finds the first longest substrings if there are multiples.
-# 
-    
-
-
+return len(max(my_list, key=len))
 
 
 
